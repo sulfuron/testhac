@@ -1,21 +1,26 @@
 package com.websystique.springmvc.service.impl;
 
+import com.websystique.springmvc.dao.TblUserMapper;
 import com.websystique.springmvc.model.TblUser;
 import com.websystique.springmvc.service.UserService;
-import org.springframework.stereotype.Service;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Iterator;
 import java.util.List;
 import java.util.concurrent.atomic.AtomicLong;
 
-@Service("userService")
 @Transactional
 public class UserServiceImpl implements UserService {
-	
+
+
 	private static final AtomicLong counter = new AtomicLong();
 
 	private static List<TblUser> users;
+
+	private static org.apache.commons.pool.impl.GenericObjectPool gp;
+	@Autowired
+	private TblUserMapper userMapper;
 
 	public List<TblUser> findAllUsers() {
 		return users;
