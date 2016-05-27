@@ -1,21 +1,16 @@
 package com.websystique.springmvc.controller;
- 
-import java.util.List;
 
+import com.websystique.springmvc.model.TblUser;
+import com.websystique.springmvc.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.util.UriComponentsBuilder;
 
-import com.websystique.springmvc.model.User;
-import com.websystique.springmvc.service.UserService;
+import java.util.List;
  
 @RestController
 public class HelloWorldRestController {
@@ -27,12 +22,12 @@ public class HelloWorldRestController {
     //-------------------Retrieve All Users--------------------------------------------------------
      
     @RequestMapping(value = "/user/", method = RequestMethod.GET)
-    public ResponseEntity<List<User>> listAllUsers() {
-        List<User> users = userService.findAllUsers();
+    public ResponseEntity<List<TblUser>> listAllUsers() {
+        List<TblUser> users = userService.findAllUsers();
         if(users.isEmpty()){
-            return new ResponseEntity<List<User>>(HttpStatus.NO_CONTENT);//You many decide to return HttpStatus.NOT_FOUND
+            return new ResponseEntity<List<TblUser>>(HttpStatus.NO_CONTENT);//You many decide to return HttpStatus.NOT_FOUND
         }
-        return new ResponseEntity<List<User>>(users, HttpStatus.OK);
+        return new ResponseEntity<List<TblUser>>(users, HttpStatus.OK);
     }
  
  
@@ -40,14 +35,14 @@ public class HelloWorldRestController {
     //-------------------Retrieve Single User--------------------------------------------------------
      
     @RequestMapping(value = "/user/{id}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<User> getUser(@PathVariable("id") long id) {
+    public ResponseEntity<TblUser> getUser(@PathVariable("id") long id) {
         System.out.println("Fetching User with id " + id);
-        User user = userService.findById(id);
+        TblUser user = userService.findById(id);
         if (user == null) {
             System.out.println("User with id " + id + " not found");
-            return new ResponseEntity<User>(HttpStatus.NOT_FOUND);
+            return new ResponseEntity<TblUser>(HttpStatus.NOT_FOUND);
         }
-        return new ResponseEntity<User>(user, HttpStatus.OK);
+        return new ResponseEntity<TblUser>(user, HttpStatus.OK);
     }
  
      
@@ -55,11 +50,11 @@ public class HelloWorldRestController {
     //-------------------Create a User--------------------------------------------------------
      
     @RequestMapping(value = "/user/", method = RequestMethod.POST)
-    public ResponseEntity<Void> createUser(@RequestBody User user,    UriComponentsBuilder ucBuilder) {
-        System.out.println("Creating User " + user.getUsername());
+    public ResponseEntity<Void> createUser(@RequestBody TblUser user, UriComponentsBuilder ucBuilder) {
+        System.out.println("Creating User " + user.getLoginName());
  
         if (userService.isUserExist(user)) {
-            System.out.println("A User with name " + user.getUsername() + " already exist");
+            System.out.println("A User with name " + user.getLoginName() + " already exist");
             return new ResponseEntity<Void>(HttpStatus.CONFLICT);
         }
  
@@ -75,22 +70,22 @@ public class HelloWorldRestController {
     //------------------- Update a User --------------------------------------------------------
      
     @RequestMapping(value = "/user/{id}", method = RequestMethod.PUT)
-    public ResponseEntity<User> updateUser(@PathVariable("id") long id, @RequestBody User user) {
+    public ResponseEntity<TblUser> updateUser(@PathVariable("id") long id, @RequestBody TblUser user) {
         System.out.println("Updating User " + id);
-         
-        User currentUser = userService.findById(id);
+
+        TblUser currentUser = userService.findById(id);
          
         if (currentUser==null) {
             System.out.println("User with id " + id + " not found");
-            return new ResponseEntity<User>(HttpStatus.NOT_FOUND);
+            return new ResponseEntity<TblUser>(HttpStatus.NOT_FOUND);
         }
- 
-        currentUser.setUsername(user.getUsername());
-        currentUser.setAddress(user.getAddress());
+
+        currentUser.setLoginName(user.getLoginName());
+//        currentUser.(user.getAddress());
         currentUser.setEmail(user.getEmail());
          
         userService.updateUser(currentUser);
-        return new ResponseEntity<User>(currentUser, HttpStatus.OK);
+        return new ResponseEntity<TblUser>(currentUser, HttpStatus.OK);
     }
  
     
@@ -98,17 +93,17 @@ public class HelloWorldRestController {
     //------------------- Delete a User --------------------------------------------------------
      
     @RequestMapping(value = "/user/{id}", method = RequestMethod.DELETE)
-    public ResponseEntity<User> deleteUser(@PathVariable("id") long id) {
+    public ResponseEntity<TblUser> deleteUser(@PathVariable("id") long id) {
         System.out.println("Fetching & Deleting User with id " + id);
- 
-        User user = userService.findById(id);
+
+        TblUser user = userService.findById(id);
         if (user == null) {
             System.out.println("Unable to delete. User with id " + id + " not found");
-            return new ResponseEntity<User>(HttpStatus.NOT_FOUND);
+            return new ResponseEntity<TblUser>(HttpStatus.NOT_FOUND);
         }
  
         userService.deleteUserById(id);
-        return new ResponseEntity<User>(HttpStatus.NO_CONTENT);
+        return new ResponseEntity<TblUser>(HttpStatus.NO_CONTENT);
     }
  
      
@@ -116,11 +111,11 @@ public class HelloWorldRestController {
     //------------------- Delete All Users --------------------------------------------------------
      
     @RequestMapping(value = "/user/", method = RequestMethod.DELETE)
-    public ResponseEntity<User> deleteAllUsers() {
+    public ResponseEntity<TblUser> deleteAllUsers() {
         System.out.println("Deleting All Users");
  
         userService.deleteAllUsers();
-        return new ResponseEntity<User>(HttpStatus.NO_CONTENT);
+        return new ResponseEntity<TblUser>(HttpStatus.NO_CONTENT);
     }
  
 }

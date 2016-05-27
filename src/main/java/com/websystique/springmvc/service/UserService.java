@@ -1,27 +1,27 @@
 package com.websystique.springmvc.service;
 
-import java.util.List;
+import com.websystique.springmvc.model.TblUser;
 
-import com.websystique.springmvc.model.User;
+import java.util.List;
 
 
 
 public interface UserService {
-	
-	User findById(long id);
-	
-	User findByName(String name);
-	
-	void saveUser(User user);
-	
-	void updateUser(User user);
-	
+
+	TblUser findById(long id);
+
+	TblUser findByName(String name);
+
+	void saveUser(TblUser user);
+
+	void updateUser(TblUser user);
+
 	void deleteUserById(long id);
 
-	List<User> findAllUsers(); 
-	
+	List<TblUser> findAllUsers();
+
 	void deleteAllUsers();
 
-	boolean isUserExist(User user);
-	
+	boolean isUserExist(TblUser user);
+
 }
