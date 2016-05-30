@@ -38,6 +38,7 @@ public class TblUser {
      * This method returns the value of the database column TBL_USER.ID
      *
      * @return the value of TBL_USER.ID
+     *
      * @mbggenerated
      */
     public Long getId() {
@@ -49,6 +50,7 @@ public class TblUser {
      * This method sets the value of the database column TBL_USER.ID
      *
      * @param id the value for TBL_USER.ID
+     *
      * @mbggenerated
      */
     public void setId(Long id) {
@@ -60,6 +62,7 @@ public class TblUser {
      * This method returns the value of the database column TBL_USER.LOGIN_NAME
      *
      * @return the value of TBL_USER.LOGIN_NAME
+     *
      * @mbggenerated
      */
     public String getLoginName() {
@@ -71,6 +74,7 @@ public class TblUser {
      * This method sets the value of the database column TBL_USER.LOGIN_NAME
      *
      * @param loginName the value for TBL_USER.LOGIN_NAME
+     *
      * @mbggenerated
      */
     public void setLoginName(String loginName) {
@@ -82,6 +86,7 @@ public class TblUser {
      * This method returns the value of the database column TBL_USER.NICK_NAME
      *
      * @return the value of TBL_USER.NICK_NAME
+     *
      * @mbggenerated
      */
     public String getNickName() {
@@ -93,6 +98,7 @@ public class TblUser {
      * This method sets the value of the database column TBL_USER.NICK_NAME
      *
      * @param nickName the value for TBL_USER.NICK_NAME
+     *
      * @mbggenerated
      */
     public void setNickName(String nickName) {
@@ -104,6 +110,7 @@ public class TblUser {
      * This method returns the value of the database column TBL_USER.EMAIL
      *
      * @return the value of TBL_USER.EMAIL
+     *
      * @mbggenerated
      */
     public String getEmail() {
@@ -115,6 +122,7 @@ public class TblUser {
      * This method sets the value of the database column TBL_USER.EMAIL
      *
      * @param email the value for TBL_USER.EMAIL
+     *
      * @mbggenerated
      */
     public void setEmail(String email) {

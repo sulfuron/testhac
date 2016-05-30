@@ -2,10 +2,9 @@ package com.websystique.springmvc.dao;
 
 import com.websystique.springmvc.model.TblUser;
 import com.websystique.springmvc.model.TblUserExample;
+import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
-
-import org.apache.ibatis.annotations.Param;
 
 public interface TblUserMapper {
     /**

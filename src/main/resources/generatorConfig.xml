@@ -140,5 +140,8 @@
             <!--<columnOverride column="" javaType=""	jdbcType=""	typeHandler=""	delimitedColumnName="" />-->
 
         </table>
+
+        <table tableName="TBL_COMPANY" schema="TEST_HAC">
+        </table>
     </context>
 </generatorConfiguration>
